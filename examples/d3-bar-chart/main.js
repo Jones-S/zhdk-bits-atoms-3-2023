@@ -1,34 +1,48 @@
 console.log("Displaying simple bar chart");
 
-// Settings
-const width = 1000;
-const height = 600;
-const barWidth = 20;
-const gutter = 10;
-const marginLeft = 30;
+// Declare the chart dimensions and margins.
+const width = 928;
+const height = 500;
+const marginTop = 30;
+const marginRight = 0;
 const marginBottom = 30;
-const maxBarHeight = 500;
+const marginLeft = 80;
 
-const data = [
-  {
-    Above_ground_potential_storage: 514335905421.954 / 10e8,
-    Habitat_name: "Forest",
-  },
-  {
-    Above_ground_potential_storage: 48233596224.5023 / 10e8,
-    Habitat_name: "Savanna",
-  },
-  {
-    Above_ground_potential_storage: 31659400958.1418 / 10e8,
-    Habitat_name: "Shrubland",
-  },
-];
+async function fetchData() {
+  const url = "./data.json";
+  let response = await fetch(url);
+
+  if (response.ok) {
+    // if HTTP-status is 200-299
+    // get the response body (the method explained below)
+    let json = await response.json();
+    console.log("Finally received the response:");
+    console.log("Response: ", json);
+    drawChart(json);
+  } else {
+    alert("HTTP-Error: " + response.status);
+  }
+}
 
 function drawChart(data) {
-  const scale = d3
+  // Declare the x (horizontal position) scale.
+  const x = d3
+    .scaleBand()
+    .domain(
+      d3.groupSort(
+        data,
+        ([d]) => -d.Above_ground_potential_storage,
+        (d) => d.Habitat_name
+      )
+    ) // descending frequency
+    .range([marginLeft, width - marginRight])
+    .padding(0.1);
+
+  // Declare the y (vertical position) scale.
+  const y = d3
     .scaleLinear()
     .domain([0, d3.max(data, (d) => d.Above_ground_potential_storage)])
-    .range([0, maxBarHeight]);
+    .range([height - marginBottom, marginTop]);
 
   // Create the SVG container.
   const svg = d3
@@ -36,32 +50,44 @@ function drawChart(data) {
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("viewBox", [0, 0, width, height]);
+    .attr("viewBox", [0, 0, width, height])
+    // slight change in styling to take up whole width
+    // also check ./style.css
+    .attr("style", "max-width: 100%; height: auto; width: 100%;");
 
+  // Add a rect for each bar.
   svg
     .append("g")
     .attr("fill", "steelblue")
-    // selecting is necessary, but we can add a random selector here ('whatever')
-    // the return value is an empty selection:
-    // https://github.com/d3/d3-selection/blob/v3.0.0/README.md#selectAll
-    // if you ask yourself why:
-    // https://stackoverflow.com/questions/17452508/what-is-the-point-of-calling-selectall-when-there-are-no-existing-nodes-yet-on-d
     .selectAll()
     .data(data)
     .join("rect")
-    // .append("rect")
-    .attr("x", (d, index) => {
-      return marginLeft + index * (barWidth + gutter);
-    })
-    .attr("y", (d) => height - d.Above_ground_potential_storage)
-    .attr("height", (d) => d.Above_ground_potential_storage)
-    .attr("width", barWidth);
+    .attr("x", (d) => x(d.Habitat_name))
+    .attr("y", (d) => y(d.Above_ground_potential_storage))
+    .attr("height", (d) => y(0) - y(d.Above_ground_potential_storage))
+    .attr("width", x.bandwidth());
 
   // Add the x-axis and label.
   svg
     .append("g")
     .attr("transform", `translate(0,${height - marginBottom})`)
-    .call(d3.axisLeft(scale).tickSizeOuter(0));
+    .call(d3.axisBottom(x).tickSizeOuter(0));
+
+  // Add the y-axis and label, and remove the domain line.
+  svg
+    .append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(y).tickFormat((y) => y.toFixed()))
+    .call((g) => g.select(".domain").remove())
+    .call((g) =>
+      g
+        .append("text")
+        .attr("x", -marginLeft)
+        .attr("y", 10)
+        .attr("fill", "currentColor")
+        .attr("text-anchor", "start")
+        .text("↑ Above_ground_current_storage (tC)")
+    );
 }
 
-drawChart(data);
+fetchData();
