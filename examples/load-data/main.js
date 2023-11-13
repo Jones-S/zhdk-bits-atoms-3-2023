@@ -1,15 +1,23 @@
 console.log("Loading the data ...");
 
+function displayData(data) {
+  const ul = document.getElementsByClassName("habitat-list")[0];
+
+  data.forEach((habitat) => {
+    const text = `${habitat.Habitat_name}: ${habitat.Above_ground_potential_storage}`;
+    const li = document.createElement("li");
+    li.innerHTML = text;
+    ul.appendChild(li);
+  });
+}
+
 async function fetchData() {
   const url = "./data.json";
   let response = await fetch(url);
 
   if (response.ok) {
-    // if HTTP-status is 200-299
-    // get the response body (the method explained below)
     let json = await response.json();
-    console.log("Finally received the response:");
-    console.log("Response: ", json);
+    displayData(json);
   } else {
     alert("HTTP-Error: " + response.status);
   }
