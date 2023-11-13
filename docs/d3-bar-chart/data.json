@@ -1,0 +1,38 @@
+[
+  {
+    "Habitat_name": "Forest",
+    "Above_ground_potential_storage": 514335905421.954
+  },
+  {
+    "Habitat_name": "Savanna",
+    "Above_ground_potential_storage": 48233596224.5023
+  },
+  {
+    "Habitat_name": "Shrubland",
+    "Above_ground_potential_storage": 31659400958.1418
+  },
+  {
+    "Habitat_name": "Grassland",
+    "Above_ground_potential_storage": 22989541028.7624
+  },
+  {
+    "Habitat_name": "Wetlands",
+    "Above_ground_potential_storage": 2547675559.98629
+  },
+  {
+    "Habitat_name": "Desert",
+    "Above_ground_potential_storage": 628019802.438484
+  },
+  {
+    "Habitat_name": "Blue Carbon Ecosystems",
+    "Above_ground_potential_storage": 3169000000
+  },
+  {
+    "Habitat_name": "Continental margins",
+    "Above_ground_potential_storage": 0
+  },
+  {
+    "Habitat_name": "Open Ocean",
+    "Above_ground_potential_storage": 0
+  }
+]
