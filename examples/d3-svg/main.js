@@ -36,7 +36,7 @@ const circleSmall = group
   .attr("cx", 250)
   .attr("cy", 300)
   .attr("r", 20)
-  .attr("fill", "green");
+  .attr("fill", "rgb(100, 0, 30)");
 
 const gutter = 50;
 const barWidth = 30;
