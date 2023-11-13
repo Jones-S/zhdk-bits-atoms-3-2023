@@ -3,11 +3,12 @@
   margin: 0;
 }
 
-.sky-svg {
-  width: 100vw;
+#d3 {
+  height: 100vh;
 }
 
-.axis {
-  stroke: #fff8b9;
-  stroke-width: 3px;
+svg {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }

@@ -250,7 +250,7 @@
     "Habitat_description": "Interplay between the continent and the open ocean, consisting of continental shelf, slope, and rise. These areas have high productivtiy due to upwelling currents that bring high nutrients from the deep sea to surface waters, fueling primary productivity in certain margins. Rivers supply significant amounts of nutrients to contintental margins, further promoting primary productivity, as well as providing high inputs of terrigenouc organic carbon. High levels of primary productivity, coupled with high sediment discharge from rivers make these continental margins important sites of carbon burial. Their depth ranges from a few meters in depth to 1000 m.",
     "Habitat_location": "data provided upon request",
     "Above_ground_current_storage": "895821406879.882",
-    "Above_ground_potential_storage": "cannot estimate.",
+    "Above_ground_potential_storage": "0",
     "Above_ground_potential_storage_minus_areas_occupied_by_humans": "not relevant (no human settlements in ocean)",
     "Difference btw": {
       " Above_ground_potential_storage and above_ground_current_storage": "not relevant (no human settlements in ocean)",
@@ -259,7 +259,7 @@
       " Below_ground_potential_storage_minus_areas_occupied_by_humans and Below_ground_current_storage": "not relevant."
     },
     "Normalized_above_ground_current_storage": "0.0172929815661739",
-    "Normalized_above_ground_potential_storage": "unkown",
+    "Normalized_above_ground_potential_storage": "0",
     "Normalized_difference btw": {
       " Above_ground_potential_storage and above_ground_current_storage": "cannot estimate.",
       " Above_ground_potential_storage_minus_areas_occupied_by_humans and Above_ground_current_storage": "not relevant (no human settlements in ocean)",
@@ -285,7 +285,7 @@
     "Habitat_description": "Areas beyond the continental margin, with big bodies of water that are far below the photic zone. Despite the high productivity in surface waters of certain gyres, the organic matter that can reach the seafloor (as marine snow) is ~1 %, since the majority is degraded during its transit time from surface waters to the seafloor. The seafloor of the open ocean has low OC content and low sedimentation rates, making them less optimal sites of carbon sequestration in the seafloor.",
     "Habitat_location": "data provided upon request",
     "Above_ground_current_storage": "37807178593120.1",
-    "Above_ground_potential_storage": "cannot estimate.",
+    "Above_ground_potential_storage": "0",
     "Above_ground_potential_storage_minus_areas_occupied_by_humans": "not relevant (no human settlements in ocean)",
     "Difference btw": {
       " Above_ground_potential_storage and above_ground_current_storage": "not relevant (no human settlements in ocean)",
@@ -294,7 +294,7 @@
       " Below_ground_potential_storage_minus_areas_occupied_by_humans and Below_ground_current_storage": "not relevant."
     },
     "Normalized_above_ground_current_storage": "0.122292349453917",
-    "Normalized_above_ground_potential_storage": "n.a.",
+    "Normalized_above_ground_potential_storage": "0",
     "Normalized_difference btw": {
       " Above_ground_potential_storage and above_ground_current_storage": "cannot estimate.",
       " Above_ground_potential_storage_minus_areas_occupied_by_humans and Above_ground_current_storage": "not relevant (no human settlements in ocean)",
@@ -302,7 +302,7 @@
       " Below_ground_potential_storage_minus_areas_occupied_by_humans and Below_ground_current_storage": "not relevant."
     },
     "Below_ground_current_storage": "1608185700000",
-    "Below_ground_potential_storage": "cannot estimate.",
+    "Below_ground_potential_storage": "0",
     "Below_ground_potential_storage_minus_areas_occupied_by_humans": "not relevant.",
     "Normalized_Below_ground_current_storage": "0.00520189061785692",
     "Normalized_Below_ground_potential_storage": "cannot estimate.",
