@@ -1,33 +1,35 @@
 console.log("Displaying simple bar chart");
 
 // Settings
-const width = 928;
-const height = 1000;
-const marginTop = 30;
-const marginRight = 0;
-const marginBottom = 30;
-const marginLeft = 40;
-const bandWidth = 20;
+const width = 1000;
+const height = 600;
+const barWidth = 20;
 const gutter = 10;
+const marginLeft = 30;
+const marginBottom = 30;
+const maxBarHeight = 500;
 
-async function fetchData() {
-  const url = "./data.json";
-  let response = await fetch(url);
-
-  if (response.ok) {
-    // if HTTP-status is 200-299
-    // get the response body (the method explained below)
-    let json = await response.json();
-    console.log("Finally received the response:");
-    console.log("Response: ", json);
-
-    drawChart(json);
-  } else {
-    alert("HTTP-Error: " + response.status);
-  }
-}
+const data = [
+  {
+    Above_ground_potential_storage: 514335905421.954 / 10e8,
+    Habitat_name: "Forest",
+  },
+  {
+    Above_ground_potential_storage: 48233596224.5023 / 10e8,
+    Habitat_name: "Savanna",
+  },
+  {
+    Above_ground_potential_storage: 31659400958.1418 / 10e8,
+    Habitat_name: "Shrubland",
+  },
+];
 
 function drawChart(data) {
+  const scale = d3
+    .scaleLinear()
+    .domain([0, d3.max(data, (d) => d.Above_ground_potential_storage)])
+    .range([0, maxBarHeight]);
+
   // Create the SVG container.
   const svg = d3
     .select("#d3")
@@ -49,12 +51,17 @@ function drawChart(data) {
     .join("rect")
     // .append("rect")
     .attr("x", (d, index) => {
-      return marginLeft + index * (bandWidth + gutter);
+      return marginLeft + index * (barWidth + gutter);
     })
-    .attr("y", (d) => height - d.Above_ground_potential_storage / 10e8)
-    .attr("height", (d) => d.Above_ground_potential_storage / 10e8)
-    .attr("width", bandWidth);
-    .
+    .attr("y", (d) => height - d.Above_ground_potential_storage)
+    .attr("height", (d) => d.Above_ground_potential_storage)
+    .attr("width", barWidth);
+
+  // Add the x-axis and label.
+  svg
+    .append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisLeft(scale).tickSizeOuter(0));
 }
 
-fetchData();
+drawChart(data);
