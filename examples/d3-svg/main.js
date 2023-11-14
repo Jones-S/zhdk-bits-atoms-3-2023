@@ -1,4 +1,4 @@
-const data = [10, 56, 95, 77];
+const data = [500, 56, 95, 77];
 
 // Add SVG
 const svg = d3
@@ -59,5 +59,4 @@ svg
   .attr("y", 40)
   .attr("width", barWidth)
   .attr("height", (d) => d)
-  .attr("rx", 3) // corner radius
-  .append("circle");
+  .attr("rx", 3); // corner radius
