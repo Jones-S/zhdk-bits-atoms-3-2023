@@ -1,0 +1,31 @@
+:root {
+  --color-wheel-size: 200px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+.color-wheel {
+  width: var(--color-wheel-size);
+  height: var(--color-wheel-size);
+  display: none;
+  position: absolute;
+  transition: all 0.1s;
+}
+
+.color-wheel.is-visible {
+  display: block;
+}
+
+#background {
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+}
