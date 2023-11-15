@@ -46,7 +46,6 @@ function udpateBackground(tokenData) {
   } else if (270 <= tokenData.rotation && tokenData.rotation <= 360) {
     color = "green";
   }
-  console.log("background: ", background);
   background.classList.remove(...background.classList); // quick way to remove all classes which are in the classList
   background.classList.add(`is-${color}`);
 }
