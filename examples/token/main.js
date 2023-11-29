@@ -74,7 +74,7 @@ function listenToTokens() {
     }
 
     const data = json.args;
-    console.log("🖲️ New data from token: ", data);
+    console.log("🖲️ New data from token: ", data, json);
 
     if (json?.type === "/tracker/add") {
       addColorWheel(data);
