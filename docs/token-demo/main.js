@@ -2,6 +2,8 @@ const colorWheel = document.querySelector(".color-wheel");
 const selectorWheel = document.querySelector(".selector-wheel");
 const background = document.querySelector("#background");
 
+const markerMap = [];
+
 function updateColorWheel(tokenData) {
   // select the inner wheel to adjust the rotation
   const innerWheel = colorWheel.querySelector(".inner-wheel");
@@ -58,20 +60,28 @@ function updateSelector(tokenData) {
   selectorWheel.style.left = `calc(${xPosPercentage}% - ${wheelSize / 2}px)`;
 }
 
-function addColorWheel(tokenData) {
-  colorWheel.classList.add("is-visible");
+function verifyOpacity(marker) {
+  if (parseInt(marker.id, 10) === 0) {
+    colorWheel.classList.add("is-visible");
+  } else {
+    selectorWheel.classList.add("is-visible");
+  }
 }
 
-function addSelectorWheel(tokenData) {
-  selectorWheel.classList.add("is-visible");
-}
-
-function removeColorWheel(tokenData) {
+function hideOpacity() {
   colorWheel.classList.remove("is-visible");
+  selectorWheel.classList.remove("is-visible");
 }
 
-function removeSelectorWheel(tokenData) {
-  selectorWheel.classList.remove("is-visible");
+function saveSessionID(data) {
+  const found = markerMap.find((tracker) => tracker.id === data.id);
+  if (found) {
+    verifyOpacity(found);
+    found.sessionId = data.sessionId;
+  } else {
+    hideOpacity();
+    markerMap.push({ id: data.id, sessionId: data.sessionId });
+  }
 }
 
 function udpateBackground(tokenData) {
@@ -87,7 +97,6 @@ function udpateBackground(tokenData) {
   } else if (270 <= tokenData.rotation && tokenData.rotation <= 360) {
     color = "green";
   }
-  console.log("background: ", background);
   background.classList.remove(...background.classList); // quick way to remove all classes which are in the classList
   background.classList.add(`is-${color}`);
 }
@@ -116,21 +125,25 @@ function listenToTokens() {
     }
 
     const data = json.args;
-    console.log("🖲️ New data from token: ", data, json);
+    // console.log("🖲️ New data from token: ", data, json);
 
-    if (json?.type === "/tracker/add") {
-      if (parseInt(data.id, 10) === 0) {
-        addColorWheel(data);
-      } else {
-        addSelectorWheel(data);
-      }
-    } else if (json?.type === "/tracker/remove") {
-      if (parseInt(data.id, 10) === 0) {
-        removeColorWheel(data);
-      } else {
-        removeSelectorWheel(data);
-      }
-    } else if (json?.type === "/tracker/update") {
+    // if (json?.type === "/tracker/add") {
+    //   if (parseInt(data.id, 10) === 0) {
+    //     addColorWheel();
+    //   } else {
+    //     addSelectorWheel();
+    //   }
+    // } else if (json?.type === "/tracker/remove") {
+    //   if (parseInt(data.id, 10) === 0) {
+    //     removeColorWheel();
+    //   } else {
+    //     console.log("data.id: ", data, parseInt(data.id, 10) === 0);
+    //     removeSelectorWheel();
+    //   }
+    // }
+
+    if (json?.type === "/tracker/update") {
+      saveSessionID(data);
       if (parseInt(data.id, 10) === 0) {
         updateColorWheel(data);
         udpateBackground(data);
