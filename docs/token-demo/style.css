@@ -1,0 +1,57 @@
+:root {
+  --color-wheel-size: 350px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+.color-wheel {
+  width: var(--color-wheel-size);
+  height: var(--color-wheel-size);
+  opacity: 0;
+  position: absolute;
+  transition: all 0.1s;
+}
+
+.selector-wheel {
+  width: var(--color-wheel-size);
+  height: var(--color-wheel-size);
+  opacity: 0;
+  position: absolute;
+  transition: all 0.1s;
+}
+
+.color-wheel.is-visible,
+.color-wheel.is-visible {
+  opacity: 1;
+}
+
+#background {
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+  transition: all 0.1s;
+}
+
+#background.is-yellow {
+  background-color: #ebd2a2;
+}
+
+#background.is-blue {
+  background-color: #333d7b;
+}
+
+#background.is-red {
+  background-color: #d21e23;
+}
+
+#background.is-green {
+  background-color: #5db196;
+}
