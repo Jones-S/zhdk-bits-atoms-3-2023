@@ -119,19 +119,19 @@ function listenToTokens() {
     console.log("🖲️ New data from token: ", data, json);
 
     if (json?.type === "/tracker/add") {
-      if (data.id === 0) {
+      if (parseInt(data.id, 10) === 0) {
         addColorWheel(data);
       } else {
         addSelectorWheel(data);
       }
     } else if (json?.type === "/tracker/remove") {
-      if (data.id === 0) {
+      if (parseInt(data.id, 10) === 0) {
         removeColorWheel(data);
       } else {
         removeSelectorWheel(data);
       }
     } else if (json?.type === "/tracker/update") {
-      if (data.id === 0) {
+      if (parseInt(data.id, 10) === 0) {
         updateColorWheel(data);
         udpateBackground(data);
       } else {
